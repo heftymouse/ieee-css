@@ -1,0 +1,156 @@
+:root {
+    font-size: 10pt;
+}
+
+* {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    /* outline: 1px solid red; */
+}
+
+body {
+    font-family: 'Times New Roman';
+    line-height: 1;
+    margin: auto;
+    width: 60%;
+}
+
+@media print {
+    body {
+        width: 100%;
+        margin: 0;
+    }
+    header > h1 {
+        margin-top: 0;
+    }
+}
+
+@page {
+    margin: 0.79cm 1.57cm 2.54cm 1.57cm;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    >h1 {
+        font-weight: normal;
+        font-size: 24pt;
+    }
+}
+
+ul.authors {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 5.1cm);
+    column-gap: 1.27cm;
+    row-gap: 9pt;
+    grid-auto-flow: row;
+    font-size: 9pt;
+
+    >li {
+        text-align: center;
+
+        >* {
+            margin: 0;
+        }
+
+        >.affiliation {
+            font-style: italic;
+        }
+    }
+}
+
+main {
+    columns: 2;
+    column-gap: 4.22mm;
+    column-fill: auto;
+    text-align: justify;
+
+    .abstract {
+        font-weight: bold;
+        text-indent: 0.48cm;
+    }
+
+    .abstract::before {
+        display: inline;
+        font-style: italic;
+        font-weight: bold;
+        content: 'Abstract—';
+    }
+
+    .keywords {
+        font-weight: bold;
+        font-style: italic;
+        text-indent: 0.48cm;
+    }
+
+    .keywords::before {
+        display: inline;
+        font-style: italic;
+        font-weight: bold;
+        content: 'Keywords—';
+    }
+
+    /* heading numbering (maybe collapse this section) */
+    counter-reset: section;
+    >section {
+        counter-increment: section;
+
+        section {
+            counter-increment: section;
+        }
+
+        section:first-of-type {
+            counter-reset: section;
+        }
+
+        >h1 {
+            text-align: center;
+            font-variant: small-caps;
+        }
+
+        >h1::before {
+            content: counter(section, upper-roman) '. ';
+        }
+  
+        >section {
+            >h1 {
+                font-style: italic;
+            }
+
+            >h1::before {
+                content: counter(section, upper-alpha) '. ';
+            }
+
+            >section {
+                >h1 {
+                    font-style: italic;
+                }
+
+                >h1::before {
+                    content: counter(section, decimal) ') ';
+                }
+
+                >section {
+                    >h1 {
+                        font-style: italic;
+                    }
+    
+                    >h1::before {
+                        content: counter(section, lower-alpha) ') ';
+                    }
+                }
+            }
+        }
+    }
+
+    /* paragraph styles */
+    p {
+        text-indent: 0.48cm;
+    }
+
+}
