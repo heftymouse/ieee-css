@@ -1,11 +1,14 @@
 :root {
     font-size: 10pt;
+    box-sizing: border-box;
 }
 
 * {
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
+    margin: 0;
+    padding: 0;
     /* outline: 1px solid red; */
 }
 
@@ -21,7 +24,8 @@ body {
         width: 100%;
         margin: 0;
     }
-    header > h1 {
+
+    header>h1 {
         margin-top: 0;
     }
 }
@@ -97,6 +101,7 @@ main {
 
     /* heading numbering (maybe collapse this section) */
     counter-reset: section;
+
     >section {
         counter-increment: section;
 
@@ -116,41 +121,77 @@ main {
         >h1::before {
             content: counter(section, upper-roman) '. ';
         }
-  
+
         >section {
             >h1 {
                 font-style: italic;
+                display: grid;
+                grid-auto-flow: column;
+                grid-template-columns: 0.51cm 1fr;
             }
 
             >h1::before {
-                content: counter(section, upper-alpha) '. ';
+                content: counter(section, upper-alpha) '.';
             }
 
             >section {
                 >h1 {
                     font-style: italic;
+                    display: grid;
+                    grid-auto-flow: column;
+                    grid-template-columns: 0.51cm 1fr;
                 }
 
                 >h1::before {
-                    content: counter(section, decimal) ') ';
+                    content: counter(section, decimal) ')';
                 }
 
                 >section {
                     >h1 {
+                        display: grid;
+                        grid-auto-flow: column;
+                        grid-template-columns: 0.51cm 1fr;
                         font-style: italic;
                     }
-    
+
                     >h1::before {
-                        content: counter(section, lower-alpha) ') ';
+                        content: counter(section, lower-alpha) ')';
                     }
                 }
             }
         }
     }
 
-    /* paragraph styles */
     p {
-        text-indent: 0.48cm;
+        text-indent: 0.51cm;
     }
 
+    ul {
+        list-style: none;
+        margin-left: 0.51cm;
+        counter-reset: list-counter;
+        --list-style: disc;
+        --list-after: ' ';
+    }
+
+    ol {
+        list-style: none;
+        margin-left: 0.51cm;
+        counter-reset: list-counter;
+        --list-style: decimal;
+        --list-after: '.';
+    }
+
+    li {
+        display: flex;
+    }
+
+    li::before {
+        display: block;
+        min-width: 2ch;
+        counter-increment: list-counter;
+        content: counter(list-counter, var(--list-style)) var(--list-after);
+    }
+
+    
 }
